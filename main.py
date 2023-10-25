@@ -37,7 +37,10 @@ def login_error_test():
         print("Test başarılı, mesaj doğru")
     else:
         print("Test başarısız")
+
+        
 login_error_test()
 
 while True:
     pass
+
