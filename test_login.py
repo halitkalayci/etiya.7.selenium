@@ -1,3 +1,4 @@
+import pytest;
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -24,11 +25,14 @@ class TestLogin():
         login_button = self.driver.find_element(By.ID, "login-button")
         login_button.click()
         assert self.driver.current_url == "https://www.saucedemo.com/inventory.html"
-    def test_with_invalid_credentials(self):
+    
+    #@pytest.mark.skip # bu testi run ederken atla
+    @pytest.mark.parametrize("username,password", [ ("halit","12345"), ("etiya","12345") ])
+    def test_with_invalid_credentials(self,username,password):
         username_input = self.driver.find_element(By.ID, "user-name")
-        username_input.send_keys("error")
+        username_input.send_keys(username)
         password_input = self.driver.find_element(By.ID,"password")
-        password_input.send_keys("secret_sauce")
+        password_input.send_keys(password)
         login_button = self.driver.find_element(By.ID, "login-button")
         login_button.click()
         errorContainer = self.driver.find_element(By.XPATH, "//*[@id='login_button_container']/div/form/div[3]/h3")
