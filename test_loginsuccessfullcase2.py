@@ -32,10 +32,15 @@ class TestLoginsuccessfullcase2():
     self.driver.find_element(By.ID, "password").send_keys("secret_sauce")
     WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located((By.ID, "login-button")))
     self.driver.find_element(By.ID, "login-button").click()
-    chains = ActionChains(self.driver)
     twitterIcon = self.driver.find_element(By.XPATH, "//*[@id='page_wrapper']/footer/ul/li[1]/a")
+    facebookIcon = self.driver.find_element(By.XPATH, "//*[@id='page_wrapper']/footer/ul/li[2]/a")
     # ekranda görünür bir noktada olmasını sağlamak
-    chains.move_to_element(twitterIcon)
-    chains.click(twitterIcon)
-    chains.perform()
+    self.moveToElementThanClick(twitterIcon)
+    self.moveToElementThanClick(facebookIcon)
     sleep(5)
+
+  def moveToElementThanClick(self, element):
+    chains = ActionChains(self.driver)
+    chains.move_to_element(element)
+    chains.click(element)
+    chains.perform()
