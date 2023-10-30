@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
+from time import sleep
 class TestLoginsuccessfullcase2():
   def setup_method(self, method):
     self.driver = webdriver.Chrome()
@@ -18,7 +18,7 @@ class TestLoginsuccessfullcase2():
   def teardown_method(self, method):
     self.driver.quit()
   
-  
+
   def test_loginsuccessfullcase2(self):
     self.driver.get("https://www.saucedemo.com/")
     self.driver.set_window_size(1920, 1032)
@@ -32,4 +32,10 @@ class TestLoginsuccessfullcase2():
     self.driver.find_element(By.ID, "password").send_keys("secret_sauce")
     WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located((By.ID, "login-button")))
     self.driver.find_element(By.ID, "login-button").click()
-  
+    chains = ActionChains(self.driver)
+    twitterIcon = self.driver.find_element(By.XPATH, "//*[@id='page_wrapper']/footer/ul/li[1]/a")
+    # ekranda görünür bir noktada olmasını sağlamak
+    chains.move_to_element(twitterIcon)
+    chains.click(twitterIcon)
+    chains.perform()
+    sleep(5)
