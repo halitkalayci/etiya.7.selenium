@@ -39,8 +39,16 @@ class TestLoginsuccessfullcase2():
     self.moveToElementThanClick(facebookIcon)
     sleep(5)
 
+
+  def test_clickTwitter(self):
+    self.driver.get("https://saucelabs.com/")
+    self.driver.set_window_size(1920, 1032)
+    twitterIcon = self.driver.find_element(By.XPATH, "//*[@id='__next']/div[8]/div[1]/div[2]/div[1]/div[1]/a")
+    self.moveToElementThanClick(twitterIcon)
+
+  
   def moveToElementThanClick(self, element):
     chains = ActionChains(self.driver)
-    chains.move_to_element(element)
-    chains.click(element)
+    chains.move_to_element(element) # 0
+    chains.click(element) # 1
     chains.perform()
